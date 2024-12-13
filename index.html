@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SGPA Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f9f9f9; /* Light background color */
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #ffffff; /* White background for the container */
+            padding: 20px;
+            border-radius: 8px; /* Rounded corners */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        h1, h2 {
+            color: #333; /* Darker text color for headings */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px; /* Increased padding for better spacing */
+            text-align: center;
+        }
+        th {
+            background-color: #f4f4f4;
+            color: #555; /* Darker text color for table headers */
+        }
+        tr:hover {
+            background-color: #f1f1f1; /* Light gray background on row hover */
+        }
+        input[type="number"] {
+            width: 80%; /* Make input fields wider */
+            padding: 8px; /* Padding inside input fields */
+            border: 1px solid #ccc; /* Border for input fields */
+            border-radius: 4px; /* Rounded corners for input fields */
+            transition: border-color 0.3s; /* Smooth transition for border color */
+        }
+        input[type="number"]:focus {
+            border-color: #007BFF; /* Change border color on focus */
+            outline: none; /* Remove default outline */
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px; /* Rounded corners for button */
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s; /* Smooth transition */
+        }
+        button:hover {
+            background-color: #0056b3;
+            transform: scale(1.05); /* Slightly enlarge button on hover */
+        }
+        #result {
+            font-size: 1.5em; /* Larger font size for result */
+            color: #007BFF; /* Blue color for result text */
+            margin-top: 20px; /* Space above result */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SGPA Calculator</h1>
+
+        <!-- Dropdown for Green Subjects
+        <label for="subject-select">Select a subject (Green section):</label>
+        <select id="subject-select" onchange="generateGreenSubjectRow()">
+            <option value="Product Life Cycle Management">Product Life Cycle Management</option>
+            <option value="Management Information System">Management Information System</option>
+            <option value="Operations Research">Operations Research</option>
+            <option value="Personal Finance Management">Personal Finance Management</option>
+            <option value="Public Systems and Policies">Public Systems and Policies</option>
+            <option value="Fundamentals of Biomedical Instruments">Fundamentals of Biomedical Instruments</option>
+            <option value="IPR and Patenting">IPR and Patenting</option>
+            <option value="Entrepreneurship and Startup Ecosystem">Entrepreneurship and Startup Ecosystem</option>
+        </select> -->
+
+        <!-- Table for Non-Green Subjects -->
+        <h2>Enter Marks for Subjects</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Course</th>
+                    <th>Credits</th>
+                    <th>Aggregate Marks (A+B)</th>
+                    <th>Max Marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Computational Mathematics</td>
+                    <td>2</td>
+                    <td><input type="number" id="marks-computational-math" placeholder="Enter marks" min="0" max="100"></td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>Computational Mathematics Tutorial</td>
+                    <td>1</td>
+                    <td><input type="number" id="marks-computational-math-tutorial" placeholder="Enter marks" min="0" max="25"></td>
+                    <td>25</td>
+                </tr>
+                <tr>
+                    <td>Data Structures</td>
+                    <td>3</td>
+                    <td><input type="number" id="marks-data-structures" placeholder="Enter marks" min="0" max="100"></td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>Data Structures Laboratory</td>
+                    <td>1</td>
+                    <td><input type="number" id="marks-data-structures-lab" placeholder="Enter marks" min="0" max="50"></td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>Database Management System</td>
+                    <td>3</td>
+                    <td><input type="number" id="marks-dbms" placeholder="Enter marks" min="0" max="100"></td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>Database Management System Laboratory</td>
+                    <td>1</td>
+                    <td><input type="number" id="marks-dbms-lab" placeholder="Enter marks" min="0" max="50"></td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>Digital Electronics</td>
+                    <td>2</td>
+                    <td><input type="number" id="marks-digital-electronics" placeholder="Enter marks" min="0" max="100"></td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>Open Electives</td>
+                    <td>3</td>
+                    <td><input type="number" id="marks-open-electives" placeholder="Enter marks" min="0" max="100"></td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>Design Thinking</td>
+                    <td>1</td>
+                    <td><input type="number" id="marks-design-thinking" placeholder="Enter marks" min="0" max="25"></td>
+                    <td>25</td>
+                </tr>
+                <tr>
+                    <td>Innovative Product Development</td>
+                    <td>1</td>
+                    <td><input type="number" id="marks-innovative-product-development" placeholder="Enter marks" min="0" max="25"></td>
+                    <td>25</td>
+                </tr>
+                <tr>
+                    <td>Universal Human Values</td>
+                    <td>2</td>
+                    <td><input type="number" id="marks-universal-human-values" placeholder="Enter marks" min="0" max="100"></td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>Universal Human Values Tutorial</td>
+                    <td>1</td>
+                    <td><input type="number" id="marks-universal-human-values-tutorial" placeholder="Enter marks" min="0" max="25"></td>
+                    <td>25</td>
+                </tr>
+                <tr>
+                    <td>Community Engagement Service</td>
+                    <td>1</td>
+                    <td><input type="number" id="marks-community-engagement" placeholder="Enter marks" min="0" max="25"></td>
+                    <td>25</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <button onclick="calculateSGPA()">Calculate SGPA</button>
+        <h2 id="result"></h2>
+    </div>
+
+    <script>
+        const subjects = [
+            { name: "Computational Mathematics", credits: 2, maxMarks: 100 },
+            { name: "Computational Mathematics Tutorial", credits: 1, maxMarks: 25 },
+            { name: "Data Structures", credits: 3, maxMarks: 100 },
+            { name: "Data Structures Laboratory", credits: 1, maxMarks: 50 },
+            { name: "Database Management System", credits: 3, maxMarks: 100 },
+            { name: "Database Management System Laboratory", credits: 1, maxMarks: 50 },
+            { name: "Digital Electronics", credits: 2, maxMarks: 100 },
+            { name: "Open Electives", credits: 3, maxMarks: 100 },
+            { name: "Design Thinking", credits : 1, maxMarks: 25 },
+            { name: "Innovative Product Development", credits: 1, maxMarks: 25 },
+            { name: "Universal Human Values", credits: 2, maxMarks: 100 },
+            { name: "Universal Human Values Tutorial", credits: 1, maxMarks: 25 },
+            { name: "Community Engagement Service", credits: 1, maxMarks: 25 },
+        ];
+
+        function calculatePointer(marks, maxMarks) {
+            const percentage = (marks / maxMarks) * 100;
+            if (percentage >= 90) return 10;
+            if (percentage >= 80) return 9;
+            if (percentage >= 70) return 8;
+            if (percentage >= 60) return 7;
+            if (percentage >= 50) return 6;
+            if (percentage >= 40) return 5;
+            return 0;
+        }
+
+        function calculateSGPA() {
+            let totalCredits = 0;
+            let totalPoints = 0;
+
+            // Calculate for non-green subjects
+            document.querySelectorAll("tbody tr").forEach(row => {
+                const cells = row.querySelectorAll("td");
+                const subjectName = cells[0].textContent;
+                const credits = parseInt(cells[1].textContent);
+                const marksInput = cells[2].querySelector("input");
+                const maxMarks = parseInt(cells[3].textContent);
+
+                const marks = parseFloat(marksInput.value);
+                if (!isNaN(marks) && marks >= 0 && marks <= maxMarks) {
+                    const pointer = calculatePointer(marks, maxMarks);
+                    totalCredits += credits;
+                    totalPoints += pointer * credits;
+                } else if (marksInput.value !== "") {
+                    alert(`Invalid marks for ${subjectName}. Please enter a value between 0 and ${maxMarks}.`);
+                    return;
+                }
+            });
+
+            // Calculate SGPA
+            const sgpa = (totalPoints / totalCredits).toFixed(2);
+            document.getElementById("result").textContent = `Your SGPA is: ${sgpa}`;
+        }
+    </script>
+</body>
+</html>
